@@ -15,9 +15,9 @@ public class HtmlUtil {
        return Jsoup.clean(htmlStr, Whitelist.none());
     }
 
-    public void validateForbiddenChar(String forbiddenChar,String text) {
-            if (!text.matches(forbiddenChar)){
-                throw new ForbiddenCharException("invalid car exist in html");
+        public static void validateForbiddenChar(String text) {
+            if (text.chars().mapToObj((c->(char) c)).anyMatch(c ->  c=='&')){
+                throw new ForbiddenCharException("invalid char in text");
             }
     }
 }
