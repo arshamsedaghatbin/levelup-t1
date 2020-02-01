@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import javax.security.auth.login.FailedLoginException;
 
 
-public class HtmlUtil {
+public class SanitizerUtil {
 
     public static String removeHtmTag(String htmlStr){
        return Jsoup.clean(htmlStr, Whitelist.none());
     }
 
         public static void validateForbiddenChar(String text) {
-            if (text.chars().mapToObj((c->(char) c)).anyMatch(c ->  c=='&')){
+            if (text.chars().mapToObj((c->(char) c)).anyMatch(c ->  c=='#' )){
                 throw new ForbiddenCharException("invalid char in text");
             }
     }

@@ -1,27 +1,32 @@
  package com.example.tesk1.service.impl;
 
+import com.example.tesk1.dto.request.TestRequest;
+import com.example.tesk1.dto.response.TestResult;
 import com.example.tesk1.exceptions.ThirdPartyServiceException;
 import com.example.tesk1.proxy.ThirdPartyCallProxy;
 import com.example.tesk1.service.ThirdPArtyService;
+import com.example.tesk1.util.SanitizerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-@Service
+ @Service
 public class ThirdPartyServiceImpl implements ThirdPArtyService {
 
 
     @Autowired
     private ThirdPartyCallProxy thirdPartyCallProxy;
-    public void callThirdParty(String htmlText){
-        ResponseEntity<Void> result = thirdPartyCallProxy.thirdPartyCall(htmlText);
+
+    public TestResult callThirdParty(String htmlText){
+        String textResult = SanitizerUtil.removeHtmTag(htmlText);
+        SanitizerUtil.validateForbiddenChar(textResult);
+        TestRequest testRequest=new TestRequest();
+        testRequest.setText(textResult);
+        ResponseEntity<TestResult> result = thirdPartyCallProxy.callSampleThirdParty(testRequest);
         if (!result.getStatusCode().is2xxSuccessful()){
             throw new ThirdPartyServiceException("third party exception",result.getStatusCode().value());
         }
+        else return result.getBody();
     }
 
 }
