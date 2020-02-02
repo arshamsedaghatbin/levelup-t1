@@ -31,9 +31,12 @@ public class Tesk1Application implements CommandLineRunner {
 
 	@Autowired
 	private ThirdPArtyService thirdPArtyService;
+
+	@Value("${html-text}")
+	private String inputText;
 	@Override
 	public void run(String... args)  {
-		TestResult testResult = thirdPArtyService.callThirdParty(args[0]);
+		TestResult testResult = thirdPArtyService.callThirdParty(inputText);
 		System.out.println(testResult.toString());
 	}
 

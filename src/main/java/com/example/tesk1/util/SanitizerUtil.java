@@ -16,7 +16,8 @@ public class SanitizerUtil {
     }
 
         public static void validateForbiddenChar(String text) {
-            if (text.chars().mapToObj((c->(char) c)).anyMatch(c ->  c=='#' )){
+            if (text.chars().mapToObj((c->(char) c)).anyMatch(c ->  c=='#' || c=='!'
+                    || c=='@'|| c=='#' ||c=='$' || c=='%' || c=='^' || c=='&' || c== '*')){
                 throw new ForbiddenCharException("invalid char in text");
             }
     }
