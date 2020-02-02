@@ -4,6 +4,7 @@ import com.example.tesk1.dto.request.TestRequest;
 import com.example.tesk1.dto.response.TestResult;
 import com.example.tesk1.exceptions.ThirdPartyServiceException;
 import com.example.tesk1.proxy.ThirdPartyCallProxy;
+import com.example.tesk1.proxy.impl.ThirdPartyCallProxyImpl;
 import com.example.tesk1.service.ThirdPArtyService;
 import com.example.tesk1.util.SanitizerUtil;
 import org.springframework.beans.factory.annotation.Autowired;

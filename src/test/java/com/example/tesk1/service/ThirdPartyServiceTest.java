@@ -2,8 +2,7 @@ package com.example.tesk1.service;
 
 import com.example.tesk1.dto.response.TestResult;
 import com.example.tesk1.exceptions.ThirdPartyServiceException;
-import com.example.tesk1.proxy.ThirdPartyCallProxy;
-import org.junit.jupiter.api.Test;
+import com.example.tesk1.proxy.impl.ThirdPartyCallProxyImpl;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +18,7 @@ class ThirdPartyServiceTest extends TestData {
 
 
 	@MockBean
-	private ThirdPartyCallProxy thirdPartyCallProxy;
+	private ThirdPartyCallProxyImpl thirdPartyCallProxyImpl;
 
 
 	@Autowired
@@ -30,7 +29,7 @@ class ThirdPartyServiceTest extends TestData {
 //	@Test
 	void check_accept_third_party() {
 		ResponseEntity<TestResult> responseEntity = new ResponseEntity<TestResult>(HttpStatus.ACCEPTED);
-		Mockito.when(thirdPartyCallProxy.callSampleThirdParty(any())
+		Mockito.when(thirdPartyCallProxyImpl.callSampleThirdParty(any())
 		).thenReturn(responseEntity);
 		thirdPArtyService.callThirdParty(strHTML);
 	}
@@ -39,7 +38,7 @@ class ThirdPartyServiceTest extends TestData {
 //	@Test
 	void check_exception_third_party() {
 		ResponseEntity<TestResult> responseEntity = new ResponseEntity<TestResult>(HttpStatus.BAD_REQUEST);
-		Mockito.when(thirdPartyCallProxy.callSampleThirdParty(any())
+		Mockito.when(thirdPartyCallProxyImpl.callSampleThirdParty(any())
 		).thenReturn(responseEntity);
 		assertThrows(ThirdPartyServiceException.class, () -> {
 			thirdPArtyService.callThirdParty(strHTML);
