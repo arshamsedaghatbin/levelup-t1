@@ -2,7 +2,7 @@
 https://www.baeldung.com/mockito-series
 # junit for tests
 https://github.com/junit-team/junit5/
-# code prettier
+# code formatter
 https://github.com/jhipster/prettier-java/tree/master/packages/prettier-plugin-java
 
 # clean code principle
