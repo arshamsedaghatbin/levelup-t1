@@ -19,8 +19,7 @@ public class HtmlUtilTest extends TestData {
 
     @Test
     void html_forbidden_char(){
-        assertThrows(ForbiddenCharException.class, () -> {
-            SanitizerUtil.validateForbiddenChar("testi&ii");
-        });
+        assertEquals("testiii",
+            SanitizerUtil.validateForbiddenChar("tes#ti&ii"));
     }
 }

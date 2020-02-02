@@ -15,10 +15,21 @@ public class SanitizerUtil {
        return Jsoup.clean(htmlStr, Whitelist.none());
     }
 
-        public static void validateForbiddenChar(String text) {
-            if (text.chars().mapToObj((c->(char) c)).anyMatch(c ->  c=='#' || c=='!'
-                    || c=='@'|| c=='#' ||c=='$' || c=='%' || c=='^' || c=='&' || c== '*')){
-                throw new ForbiddenCharException("invalid char in text");
-            }
+
+
+    public static  String validateForbiddenChar(String text) {
+        return text.codePoints()
+                .filter(c -> (char) c != '&')
+                .filter(c -> (char) c != '!')
+                .filter(c -> (char) c != '@')
+                .filter(c -> (char) c != '$')
+                .filter(c -> (char) c != '%')
+                .filter(c -> (char) c != '^')
+                .filter(c -> (char) c != '*')
+                .filter(c -> (char) c != '#')
+                .collect(StringBuilder::new,            // supplier
+                        StringBuilder::appendCodePoint, // accumulator
+                        StringBuilder::append)            // combiner
+                .toString();
     }
 }
