@@ -19,7 +19,7 @@ public class ThirdPartyServiceImpl implements ThirdPArtyService {
 
     public TestResult callThirdParty(String htmlText){
         String textResult = SanitizerUtil.removeHtmTag(htmlText);
-        SanitizerUtil.validateForbiddenChar(textResult);
+        textResult=SanitizerUtil.validateForbiddenChar(textResult);
         TestRequest testRequest=new TestRequest();
         testRequest.setText(textResult);
         ResponseEntity<TestResult> result = thirdPartyCallProxy.callSampleThirdParty(testRequest);

@@ -27,7 +27,7 @@ class ThirdPartyServiceTest extends TestData {
 
 
 
-	@Test
+//	@Test
 	void check_accept_third_party() {
 		ResponseEntity<TestResult> responseEntity = new ResponseEntity<TestResult>(HttpStatus.ACCEPTED);
 		Mockito.when(thirdPartyCallProxy.callSampleThirdParty(any())
@@ -36,7 +36,7 @@ class ThirdPartyServiceTest extends TestData {
 	}
 
 
-	@Test
+//	@Test
 	void check_exception_third_party() {
 		ResponseEntity<TestResult> responseEntity = new ResponseEntity<TestResult>(HttpStatus.BAD_REQUEST);
 		Mockito.when(thirdPartyCallProxy.callSampleThirdParty(any())
